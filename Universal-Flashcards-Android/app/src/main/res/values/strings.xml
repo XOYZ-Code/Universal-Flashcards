@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Universal Flashcards</string>
+
+    <!--activity_main-->
+    <string name="button_register">Register</string>
+    <string name="button_login">Login</string>
+
+    <!--Other Default Values-->
+    <string name="default_toast_text">This is a toast</string>
 </resources>

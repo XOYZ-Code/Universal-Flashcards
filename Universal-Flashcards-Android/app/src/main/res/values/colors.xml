@@ -3,4 +3,16 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+
+    <color name="white">#FFFFFF</color>
+
+    <color name="link">#80CBC4</color>
+
+    <color name="toast_basic">#616161</color>
+
+    <!--Buttons-->
+    <color name="button_custom_border_default">#00BCD4</color>
+    <color name="button_custom_border_disabled">#9E9E9E</color>
+    <color name="button_custom_border_hover">#009688</color>
+    <color name="button_custom_border_pressed">#607D8B</color>
 </resources>
