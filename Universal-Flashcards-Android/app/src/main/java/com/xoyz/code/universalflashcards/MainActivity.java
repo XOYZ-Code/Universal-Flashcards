@@ -6,6 +6,7 @@ import java.security.NoSuchAlgorithmException;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
@@ -142,5 +143,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, Universal_Flashcard_menu.class);
         startActivity(intent);
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        this.finish();
     }
 }
