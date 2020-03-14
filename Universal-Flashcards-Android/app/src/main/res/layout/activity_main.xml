@@ -72,6 +72,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="5dp" />
 
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:layout_weight="1" />
+
                 <EditText
                     android:id="@+id/editText3"
                     android:layout_width="300dp"
@@ -80,6 +85,13 @@
                     android:ems="10"
                     android:hint="repeat password"
                     android:inputType="textPassword" />
+
+                <CheckBox
+                    android:id="@+id/checkBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/checkbox_accept_tou" />
 
                 <Button
                     android:id="@+id/button_main_register"

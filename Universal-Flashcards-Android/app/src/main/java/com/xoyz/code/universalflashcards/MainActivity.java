@@ -6,6 +6,7 @@ import java.security.NoSuchAlgorithmException;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.content.Intent;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.DrawableWrapper;
@@ -30,10 +31,12 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.muddzdev.styleabletoast.StyleableToast;
 import com.xoyz.code.universalflashcards.R;
+import com.xoyz.code.universalflashcards.global_classes.ufc_system;
 
 public class MainActivity extends AppCompatActivity {
 
     private Point size = new Point();
+    private int last_screen = 0;
 
     public MainActivity() throws NoSuchAlgorithmException {
 
@@ -63,77 +66,81 @@ public class MainActivity extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showToast(v, "Feature currently not implemented", "snackbar");
-                // System.out.println(String.valueOf(login(editText_user_email.getText().toString(), editText_user_password.getText().toString())));
+                if(ufc_system.login(editText_user_email.getText().toString(), editText_user_password.getText().toString())) {
+                    goToMainMenu();
+                } else {
+                    ufc_system.showToast(this, v, "Please check your login information and try again", ufc_system.Toast_Snackbar_autohide);
+                }
             }
         });
 
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showToast(v, "Feature currently not implemented", "snackbar");
+                ufc_system.showToast(this, v, "Feature currently not implemented. If you have any questions please contact the support", ufc_system.Toast_Snackbar_autohide);
             }
         });
 
         textView_to_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LL_login.setVisibility(View.VISIBLE);
-                LL_register.setVisibility(View.GONE);
+                LL_register.animate().setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                        super.onAnimationStart(animation);
+                        textView_to_login.setEnabled(false);
+                        textView_to_register.setEnabled(false);
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        super.onAnimationEnd(animation);
+                        textView_to_login.setEnabled(true);
+                        textView_to_register.setEnabled(true);
+                        if(last_screen == 0) {
+                            LL_register.setVisibility(View.GONE);
+                            LL_login.setVisibility(View.VISIBLE);
+                            LL_login.animate().alpha(1f).start();
+                        }
+                    }
+                });
+                last_screen = 0;
+                LL_register.animate().alpha(0f).start();
             }
         });
 
         textView_to_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LL_login.setVisibility(View.GONE);
-                LL_register.setVisibility(View.VISIBLE);
+                LL_login.animate().setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationStart(Animator animation) {
+                        super.onAnimationStart(animation);
+                        textView_to_login.setEnabled(false);
+                        textView_to_register.setEnabled(false);
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        super.onAnimationEnd(animation);
+                        if(last_screen == 1) {
+                            LL_login.setVisibility(View.GONE);
+                            LL_register.setVisibility(View.VISIBLE);
+                            LL_register.animate().alpha(1f).start();
+                        }
+                        textView_to_login.setEnabled(true);
+                        textView_to_register.setEnabled(true);
+                    }
+                });
+                last_screen = 1;
+                LL_login.animate().alpha(0f).start();
             }
         });
     }
 
-    private void showToast(View v, final String message, String type) {
-        switch(type) {
-            case "toast":
-                StyleableToast stToast = StyleableToast.makeText(this, message, Toast.LENGTH_LONG, R.style.toast_custom_basic);
-                //stToast.setGravity(Gravity.BOTTOM);
-                stToast.show();
-                break;
-
-            case "snackbar":
-                final Snackbar snacki = Snackbar.make(v, message, Snackbar.LENGTH_LONG);
-                snacki.setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE);
-                snacki.setDuration(BaseTransientBottomBar.LENGTH_INDEFINITE);
-                snacki.setAction("Ok", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // showToast(v, "Snackbar was pressed", "toast");
-                        snacki.dismiss();
-                    }
-                });
-                snacki.addCallback(new Snackbar.Callback());
-                snacki.show();
-                break;
-
-            case "snackbar_autohide":
-                final Snackbar snacki_autohide = Snackbar.make(v, message, Snackbar.LENGTH_LONG);
-                snacki_autohide.setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE);
-                snacki_autohide.setDuration(BaseTransientBottomBar.LENGTH_LONG);
-                snacki_autohide.setAction("Ok", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // showToast(v, "Snackbar was pressed", "toast");
-                        snacki_autohide.dismiss();
-                    }
-                });
-                snacki_autohide.addCallback(new Snackbar.Callback());
-                snacki_autohide.show();
-                break;
-        }
-    }
-
-    private boolean login(String user_email, String user_password) {
-        if(user_email.equals("xoyz.productions@gmail.com") && user_password.equals("123456")) { return true; }
-        return false;
+    private void goToMainMenu() {
+        Intent intent = new Intent(this, Universal_Flashcard_menu.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
     }
 }
