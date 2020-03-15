@@ -10,6 +10,12 @@
 
     <color name="toast_basic">#616161</color>
 
+    <!--List View Colors-->
+    <color name="list_view_main_title">#424242</color>
+    <color name="list_view_sub_title">#757575</color>
+    <color name="list_view_background_color">#E0E0E0</color>
+    <color name="list_view_border_color">#9E9E9E</color>
+
     <!--Buttons-->
     <color name="button_custom_border_default">#00BCD4</color>
     <color name="button_custom_border_disabled">#9E9E9E</color>

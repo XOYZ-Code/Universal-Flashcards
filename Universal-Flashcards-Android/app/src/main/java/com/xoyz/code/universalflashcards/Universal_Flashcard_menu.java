@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
+import android.widget.ListView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -18,7 +19,12 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.xoyz.code.universalflashcards.global_classes.ufc_system;
+
+import java.util.ArrayList;
 
 public class Universal_Flashcard_menu extends AppCompatActivity {
 
@@ -38,7 +44,9 @@ public class Universal_Flashcard_menu extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
+
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -49,6 +57,19 @@ public class Universal_Flashcard_menu extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        ArrayList<RecyclerViewItem> recyclerList = new ArrayList<>();
+        recyclerList.add(new RecyclerViewItem(R.drawable.ic_apps_black_24dp, "Line 1.1", "Line 2.1"));
+        recyclerList.add(new RecyclerViewItem(R.drawable.ic_apps_black_24dp, "Line 1.2", "Line 2.2"));
+        recyclerList.add(new RecyclerViewItem(R.drawable.ic_apps_black_24dp, "Line 1.3", "Line 2.3"));
+
+        RecyclerView recyclerView_main = findViewById(R.id.recyclerView);
+        recyclerView_main.setHasFixedSize(false);
+        RecyclerView.Adapter recyclerView_adapter = new RecyclerViewAdapter(recyclerList);
+        RecyclerView.LayoutManager recyclerView_layoutmanager = new LinearLayoutManager(this);
+
+        recyclerView_main.setLayoutManager(recyclerView_layoutmanager);
+        recyclerView_main.setAdapter(recyclerView_adapter);
     }
 
     @Override
@@ -90,5 +111,9 @@ public class Universal_Flashcard_menu extends AppCompatActivity {
     public void finish() {
         super.finish();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+    }
+
+    public void update_listview() {
+
     }
 }
