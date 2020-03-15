@@ -8,8 +8,8 @@ android {
         applicationId "com.xoyz.code.universalflashcards"
         minSdkVersion 26
         targetSdkVersion 28
-        versionCode 8
-        versionName '0.0.8'
+        versionCode 9
+        versionName '0.0.9'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
