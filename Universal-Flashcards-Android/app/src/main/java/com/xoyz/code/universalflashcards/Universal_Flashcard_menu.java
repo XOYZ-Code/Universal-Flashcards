@@ -22,12 +22,14 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.xoyz.code.universalflashcards.exmamplelist.ExampleAdapter;
+import com.xoyz.code.universalflashcards.exmamplelist.ExampleItem;
 import com.xoyz.code.universalflashcards.global_classes.ufc_system;
 
 import java.util.ArrayList;
 
 public class Universal_Flashcard_menu extends AppCompatActivity {
-
+    private ArrayList<ExampleItem> exampleList = new ArrayList<>();
     private AppBarConfiguration mAppBarConfiguration;
 
     @Override
@@ -57,19 +59,6 @@ public class Universal_Flashcard_menu extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-
-        ArrayList<RecyclerViewItem> recyclerList = new ArrayList<>();
-        recyclerList.add(new RecyclerViewItem(R.drawable.ic_apps_black_24dp, "Line 1.1", "Line 2.1"));
-        recyclerList.add(new RecyclerViewItem(R.drawable.ic_apps_black_24dp, "Line 1.2", "Line 2.2"));
-        recyclerList.add(new RecyclerViewItem(R.drawable.ic_apps_black_24dp, "Line 1.3", "Line 2.3"));
-
-        RecyclerView recyclerView_main = findViewById(R.id.recyclerView);
-        recyclerView_main.setHasFixedSize(false);
-        RecyclerView.Adapter recyclerView_adapter = new RecyclerViewAdapter(recyclerList);
-        RecyclerView.LayoutManager recyclerView_layoutmanager = new LinearLayoutManager(this);
-
-        recyclerView_main.setLayoutManager(recyclerView_layoutmanager);
-        recyclerView_main.setAdapter(recyclerView_adapter);
     }
 
     @Override
@@ -99,7 +88,21 @@ public class Universal_Flashcard_menu extends AppCompatActivity {
         });
         builder.setNegativeButton("No, I want to stay!", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-
+                exampleList.add(new ExampleItem(R.drawable.ic_apps_black_24dp, "Line", String.valueOf(java.time.LocalTime.now())));
+                exampleList.add(new ExampleItem(R.drawable.ic_apps_black_24dp, "Line", String.valueOf(java.time.LocalTime.now())));
+                exampleList.add(new ExampleItem(R.drawable.ic_apps_black_24dp, "Line", String.valueOf(java.time.LocalTime.now())));
+                exampleList.add(new ExampleItem(R.drawable.ic_apps_black_24dp, "Line", String.valueOf(java.time.LocalTime.now())));
+                exampleList.add(new ExampleItem(R.drawable.ic_apps_black_24dp, "Line", String.valueOf(java.time.LocalTime.now())));
+                exampleList.add(new ExampleItem(R.drawable.ic_apps_black_24dp, "Line", String.valueOf(java.time.LocalTime.now())));
+                exampleList.add(new ExampleItem(R.drawable.ic_apps_black_24dp, "Line", String.valueOf(java.time.LocalTime.now())));
+                exampleList.add(new ExampleItem(R.drawable.ic_apps_black_24dp, "Line", String.valueOf(java.time.LocalTime.now())));
+                exampleList.add(new ExampleItem(R.drawable.ic_apps_black_24dp, "Line", String.valueOf(java.time.LocalTime.now())));
+                exampleList.add(new ExampleItem(R.drawable.ic_apps_black_24dp, "Line", String.valueOf(java.time.LocalTime.now())));
+                exampleList.add(new ExampleItem(R.drawable.ic_apps_black_24dp, "Line", String.valueOf(java.time.LocalTime.now())));
+                exampleList.add(new ExampleItem(R.drawable.ic_apps_black_24dp, "Line", String.valueOf(java.time.LocalTime.now())));
+                exampleList.add(new ExampleItem(R.drawable.ic_apps_black_24dp, "Line", String.valueOf(java.time.LocalTime.now())));
+                exampleList.add(new ExampleItem(R.drawable.ic_apps_black_24dp, "Line", String.valueOf(java.time.LocalTime.now())));
+                update_listview();
             }
         });
 
@@ -114,6 +117,12 @@ public class Universal_Flashcard_menu extends AppCompatActivity {
     }
 
     public void update_listview() {
+        RecyclerView mRecyclerView = findViewById(R.id.recyclerView);
+        mRecyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
+        RecyclerView.Adapter mAdapter = new ExampleAdapter(exampleList);
 
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
     }
 }
