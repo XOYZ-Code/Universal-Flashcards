@@ -88,20 +88,7 @@ public class Universal_Flashcard_menu extends AppCompatActivity {
         });
         builder.setNegativeButton("No, I want to stay!", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                exampleList.add(new ExampleItem(R.drawable.ic_apps_black_24dp, "Line", String.valueOf(java.time.LocalTime.now())));
-                exampleList.add(new ExampleItem(R.drawable.ic_apps_black_24dp, "Line", String.valueOf(java.time.LocalTime.now())));
-                exampleList.add(new ExampleItem(R.drawable.ic_apps_black_24dp, "Line", String.valueOf(java.time.LocalTime.now())));
-                exampleList.add(new ExampleItem(R.drawable.ic_apps_black_24dp, "Line", String.valueOf(java.time.LocalTime.now())));
-                exampleList.add(new ExampleItem(R.drawable.ic_apps_black_24dp, "Line", String.valueOf(java.time.LocalTime.now())));
-                exampleList.add(new ExampleItem(R.drawable.ic_apps_black_24dp, "Line", String.valueOf(java.time.LocalTime.now())));
-                exampleList.add(new ExampleItem(R.drawable.ic_apps_black_24dp, "Line", String.valueOf(java.time.LocalTime.now())));
-                exampleList.add(new ExampleItem(R.drawable.ic_apps_black_24dp, "Line", String.valueOf(java.time.LocalTime.now())));
-                exampleList.add(new ExampleItem(R.drawable.ic_apps_black_24dp, "Line", String.valueOf(java.time.LocalTime.now())));
-                exampleList.add(new ExampleItem(R.drawable.ic_apps_black_24dp, "Line", String.valueOf(java.time.LocalTime.now())));
-                exampleList.add(new ExampleItem(R.drawable.ic_apps_black_24dp, "Line", String.valueOf(java.time.LocalTime.now())));
-                exampleList.add(new ExampleItem(R.drawable.ic_apps_black_24dp, "Line", String.valueOf(java.time.LocalTime.now())));
-                exampleList.add(new ExampleItem(R.drawable.ic_apps_black_24dp, "Line", String.valueOf(java.time.LocalTime.now())));
-                exampleList.add(new ExampleItem(R.drawable.ic_apps_black_24dp, "Line", String.valueOf(java.time.LocalTime.now())));
+                //exampleList.add(new ExampleItem(R.drawable.ic_apps_black_24dp, "Line", String.valueOf(java.time.LocalTime.now())));
                 update_listview();
             }
         });
@@ -117,6 +104,8 @@ public class Universal_Flashcard_menu extends AppCompatActivity {
     }
 
     public void update_listview() {
+        System.out.println(ufc_system.readAll("MainActivity.java"));
+
         RecyclerView mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);

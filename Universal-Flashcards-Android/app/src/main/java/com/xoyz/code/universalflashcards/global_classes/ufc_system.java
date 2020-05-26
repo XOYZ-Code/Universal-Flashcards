@@ -1,6 +1,7 @@
 package com.xoyz.code.universalflashcards.global_classes;
 
 import android.content.Context;
+import android.util.JsonReader;
 import android.view.View;
 import android.widget.Toast;
 
@@ -10,6 +11,13 @@ import com.muddzdev.styleabletoast.StyleableToast;
 import com.xoyz.code.universalflashcards.R;
 
 import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class ufc_system {
     public static String Toast_Toast = "toast";
@@ -60,6 +68,33 @@ public class ufc_system {
                 snacki_autohide.addCallback(new Snackbar.Callback());
                 snacki_autohide.show();
                 break;
+        }
+    }
+
+    public static String readAll(String filePath)
+    {
+        String content = "";
+        try {
+            content = new String ( Files.readAllBytes( Paths.get(filePath) ) );
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return content;
+    }
+
+    public static void t() throws IOException {
+        URL url = new URL("https://graph.facebook.com/search?q=java&type=post");
+        try (InputStream is = url.openStream();
+             JsonReader rdr = Json.createReader(is)) {
+            JsonObject obj = rdr.readObject();
+            JsonArray results = obj.getJsonArray("data");
+            for (JsonObject result : results.getValuesAs(JsonObject.class)) {
+                System.out.print(result.getJsonObject("from").getString("name"));
+                System.out.print(": ");
+                System.out.println(result.getString("message", ""));
+                System.out.println("-----------");
+            }
         }
     }
 }
