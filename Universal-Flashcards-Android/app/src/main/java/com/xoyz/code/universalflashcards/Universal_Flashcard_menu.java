@@ -26,6 +26,7 @@ import com.xoyz.code.universalflashcards.exmamplelist.ExampleAdapter;
 import com.xoyz.code.universalflashcards.exmamplelist.ExampleItem;
 import com.xoyz.code.universalflashcards.global_classes.ufc_system;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Universal_Flashcard_menu extends AppCompatActivity {
@@ -89,6 +90,11 @@ public class Universal_Flashcard_menu extends AppCompatActivity {
         builder.setNegativeButton("No, I want to stay!", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 //exampleList.add(new ExampleItem(R.drawable.ic_apps_black_24dp, "Line", String.valueOf(java.time.LocalTime.now())));
+                try {
+                    ufc_system.t();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 update_listview();
             }
         });

@@ -10,14 +10,19 @@ import com.google.android.material.snackbar.Snackbar;
 import com.muddzdev.styleabletoast.StyleableToast;
 import com.xoyz.code.universalflashcards.R;
 
-import org.json.JSONObject;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Iterator;
 
 public class ufc_system {
     public static String Toast_Toast = "toast";
@@ -83,18 +88,33 @@ public class ufc_system {
         return content;
     }
 
+    private static void write_to_file(String path, String content) throws IOException {
+        FileWriter fileWriter = new FileWriter(path);
+        fileWriter.write(content);
+    }
+
     public static void t() throws IOException {
-        URL url = new URL("https://graph.facebook.com/search?q=java&type=post");
-        try (InputStream is = url.openStream();
-             JsonReader rdr = Json.createReader(is)) {
-            JsonObject obj = rdr.readObject();
-            JsonArray results = obj.getJsonArray("data");
-            for (JsonObject result : results.getValuesAs(JsonObject.class)) {
-                System.out.print(result.getJsonObject("from").getString("name"));
-                System.out.print(": ");
-                System.out.println(result.getString("message", ""));
-                System.out.println("-----------");
+        write_to_file("/test.json", "[3,2]");
+        JSONParser parser = new JSONParser();
+        try {
+            Object obj = parser.parse(new FileReader("/test.json"));
+
+            // A JSON object. Key value pairs are unordered. JSONObject supports java.util.Map interface.
+            JSONObject jsonObject = (JSONObject) obj;
+
+            // A JSON array. JSONObject supports java.util.List interface.
+            JSONArray companyList = (JSONArray) jsonObject.get("Company List");
+
+            // An iterator over a collection. Iterator takes the place of Enumeration in the Java Collections Framework.
+            // Iterators differ from enumerations in two ways:
+            // 1. Iterators allow the caller to remove elements from the underlying collection during the iteration with well-defined semantics.
+            // 2. Method names have been improved.
+            assert companyList != null;
+            for (Object o : companyList) {
+                System.out.println(o);
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
