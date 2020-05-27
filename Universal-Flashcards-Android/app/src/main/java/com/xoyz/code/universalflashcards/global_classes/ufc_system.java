@@ -76,14 +76,14 @@ public class ufc_system {
         }
     }
 
-    public static String readAll(String filePath) {
+    public static String readRaw(String filePath) throws IOException {
         String content = "";
-        try {
-            content = new String ( Files.readAllBytes( Paths.get(filePath) ) );
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        content = new String ( Files.readAllBytes( Paths.get(filePath) ) );
         return content;
+    }
+
+    public static void writeRaw(String path, String content) throws IOException {
+        FileWriter fileWriter = new FileWriter(path);
+        fileWriter.write(content);
     }
 }

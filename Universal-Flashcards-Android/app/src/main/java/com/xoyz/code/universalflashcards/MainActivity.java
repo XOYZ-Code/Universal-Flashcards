@@ -2,6 +2,8 @@ package com.xoyz.code.universalflashcards;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.File;
+import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
 import android.animation.Animator;
@@ -45,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        final File path = this.getApplicationContext().getFilesDir();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -79,6 +82,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ufc_system.showToast(this, v, "Feature currently not implemented. If you have any questions please contact the support", ufc_system.Toast_Snackbar_autohide);
+                try {
+                    ufc_system.writeRaw(path + "/user.txt", "A new user has been created. Nah sorry this function");
+                    System.out.println(path + "/user.txt");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
