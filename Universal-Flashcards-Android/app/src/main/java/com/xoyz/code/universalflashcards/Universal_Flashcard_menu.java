@@ -1,12 +1,10 @@
 package com.xoyz.code.universalflashcards;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
-import android.widget.ListView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -26,7 +24,9 @@ import com.xoyz.code.universalflashcards.exmamplelist.ExampleAdapter;
 import com.xoyz.code.universalflashcards.exmamplelist.ExampleItem;
 import com.xoyz.code.universalflashcards.global_classes.ufc_system;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Universal_Flashcard_menu extends AppCompatActivity {
     private ArrayList<ExampleItem> exampleList = new ArrayList<>();
@@ -104,7 +104,11 @@ public class Universal_Flashcard_menu extends AppCompatActivity {
     }
 
     public void update_listview() {
-        System.out.println(ufc_system.readAll("MainActivity.java"));
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        File curdir = new File(this.getApplicationContext().getFilesDir() + "/");
+        builder.setMessage("Path: " + Arrays.toString(curdir.listFiles())).setTitle(this.getApplicationContext().getFilesDir() + "/");
+        AlertDialog dialog = builder.create();
+        dialog.show();
 
         RecyclerView mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);

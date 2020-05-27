@@ -71,8 +71,7 @@ public class ufc_system {
         }
     }
 
-    public static String readAll(String filePath)
-    {
+    public static String readAll(String filePath) {
         String content = "";
         try {
             content = new String ( Files.readAllBytes( Paths.get(filePath) ) );
@@ -81,20 +80,5 @@ public class ufc_system {
         }
 
         return content;
-    }
-
-    public static void t() throws IOException {
-        URL url = new URL("https://graph.facebook.com/search?q=java&type=post");
-        try (InputStream is = url.openStream();
-             JsonReader rdr = Json.createReader(is)) {
-            JsonObject obj = rdr.readObject();
-            JsonArray results = obj.getJsonArray("data");
-            for (JsonObject result : results.getValuesAs(JsonObject.class)) {
-                System.out.print(result.getJsonObject("from").getString("name"));
-                System.out.print(": ");
-                System.out.println(result.getString("message", ""));
-                System.out.println("-----------");
-            }
-        }
     }
 }
