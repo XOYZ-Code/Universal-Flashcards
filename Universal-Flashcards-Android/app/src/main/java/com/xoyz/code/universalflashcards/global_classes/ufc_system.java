@@ -13,7 +13,7 @@ import com.xoyz.code.universalflashcards.R;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-
+import com.google.gson.*;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;

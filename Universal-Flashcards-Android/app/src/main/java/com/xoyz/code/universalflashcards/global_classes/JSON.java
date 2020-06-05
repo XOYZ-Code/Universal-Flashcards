@@ -2,6 +2,7 @@ package com.xoyz.code.universalflashcards.global_classes;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.*;
 
 import java.io.IOException;
 
@@ -10,8 +11,7 @@ public class JSON {
     private static ObjectMapper objectMapper = getDefaultObjectMapper();
 
     private static ObjectMapper getDefaultObjectMapper() {
-        ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper;
+        return new ObjectMapper();
     }
 
     public static JsonNode readJson(String content) throws IOException {
