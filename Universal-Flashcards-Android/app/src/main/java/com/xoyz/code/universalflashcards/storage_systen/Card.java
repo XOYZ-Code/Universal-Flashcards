@@ -9,6 +9,9 @@ public class Card {
 
     private Timestamp timestemp_creation;
 
+    private String cardID = "";
+
+    private int stats_reviewed = 0;
     private int stats_passed = 0;
     private int stats_failed = 0;
     private int stats_knowlegdePoints = 0;
@@ -19,5 +22,16 @@ public class Card {
     public Card() {
         Date date = new Date();
         this.timestemp_creation = new Timestamp(date.getTime());
+        this.generateNewCardID();
+    }
+
+    private void generateNewCardID() {
+        Date cacheDate = new Date();
+        StringBuilder cacheID = new StringBuilder(String.valueOf(cacheDate.toString()) + "_");
+        char[] letters = "abcdefghijklmnopqrstuvwABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
+        for (int i = 0; i < 10; i++) {
+            cacheID.append(letters[(int) (Math.random() * letters.length)]);
+        }
+        this.cardID = cacheID.toString();
     }
 }
