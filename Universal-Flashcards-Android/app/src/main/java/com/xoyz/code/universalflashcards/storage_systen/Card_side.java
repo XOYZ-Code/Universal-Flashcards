@@ -6,7 +6,7 @@ public class Card_side {
     private boolean sound_available = false;
     private String content;
 
-    public Card_side(String content) {
+    Card_side(String content) {
         this.content = content;
     }
 
